@@ -13,6 +13,13 @@ export default class Layout extends React.Component<ILayoutProps, ILayoutState> 
     }
 
     render() {
-        return <h1>Roguelike!</h1>
+        return (
+            <div>
+                <h1>My Roguelike</h1>
+                <main>
+                    { this.props.children }
+                </main>
+            </div>
+        )
     }
 }

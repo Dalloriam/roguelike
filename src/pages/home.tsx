@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import Game from "../game";
+
 export interface IHomeProps {}
 
 export interface IHomeState {}

@@ -1,0 +1,24 @@
+{
+  "name": "roguelike",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "William Dussault <dalloriam@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.26.0",
+    "source-map-loader": "^0.1.6",
+    "typescript": "^2.1.5",
+    "webpack": "^1.14.0"
+  },
+  "dependencies": {
+    "@types/react": "^15.0.2",
+    "@types/react-dom": "^0.14.21",
+    "@types/react-router": "^2.0.46",
+    "autoprefixer": "^6.7.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-router": "^3.0.2",
+    "ts-loader": "^2.0.0"
+  }
+}

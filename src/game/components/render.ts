@@ -11,6 +11,8 @@ export class GetDisplayChar implements IEvent {
 
 export class Render implements IComponent {
 
+    Name = "render";
+
     Char: string;
     CharFg: string;
     CharBg: string;
@@ -22,11 +24,7 @@ export class Render implements IComponent {
     }
 
     FireEvent(e: IEvent): boolean {
-        if (e.ID == "GetDisplayChar") {
-            (e as GetDisplayChar).DisplayChar = this.Char;
-            return true
-        }
-        return false
+        return false;
     }
 
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { GameObject } from "./engine";
 
-import  { Render, GetDisplayChar } from "./game_components/render";
+import  { Render, GetDisplayChar } from "./components/render";
 
 export interface IGameProps {
 };
@@ -37,7 +37,6 @@ export default class Game extends React.Component<IGameProps, IGameState> {
     }
 
     refs: {
-        [string: string]: (Element);
         canvas: (HTMLCanvasElement);
     }
 

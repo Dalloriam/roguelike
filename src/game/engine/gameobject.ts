@@ -22,7 +22,7 @@ export class GameObject {
 
     hasComponent(componentName: string): boolean {
         return this.Components.filter((c) => {
-            c.Name == componentName;
+            return c.Name == componentName;
         }).length > 0;
     }
 

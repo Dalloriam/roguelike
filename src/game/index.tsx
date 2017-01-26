@@ -2,7 +2,10 @@ import * as React from "react";
 
 import { GameObject } from "./engine";
 
-import  { Render, GetDisplayChar } from "./components/render";
+import  { Render, Position } from "./components";
+import { ChangePosition } from "./components/position";
+
+import World from "./world";
 
 export interface IGameProps {
 };
@@ -32,8 +35,6 @@ export default class Game extends React.Component<IGameProps, IGameState> {
             context: null,
             inGame: false
         }
-
-        this.startGame();
     }
 
     refs: {
@@ -45,16 +46,18 @@ export default class Game extends React.Component<IGameProps, IGameState> {
         this.setState({
             context: context
         });
-    }
-
-    startGame() {
-        this.setState({
-            inGame: true
-        });
-        let player = new GameObject("Player", [new Render("@", "white", "black")]);
-        let evt = new GetDisplayChar();
-        player.FireEvent(evt)
-        console.log(evt.DisplayChar);
+        let w = new World(20, 20, 30, context);
+        w.addObject(
+            new GameObject("Player", [
+                new Render("@", "white", "black"),
+                new Position(10, 10)
+            ])
+        )
+        w.tick();
+        setTimeout(() => {
+            w.getObject(0).FireEvent(new ChangePosition(2, 2));
+            w.tick();
+        }, 5000)
     }
 
     render() {

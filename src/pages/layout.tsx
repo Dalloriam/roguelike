@@ -15,7 +15,7 @@ export default class Layout extends React.Component<ILayoutProps, ILayoutState> 
     render() {
         return (
             <div>
-                <h1>My Roguelike</h1>
+                <h1>Roguelike Test</h1>
                 <main>
                     { this.props.children }
                 </main>

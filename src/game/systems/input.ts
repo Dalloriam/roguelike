@@ -41,21 +41,23 @@ export class InputSystem implements ISystem {
             let dX: number;
             let dY: number;
 
+            let step = 1;
+
             switch(pressedKey) {
                 case this.keys.MOVEMENT_UP:
                     dX = 0;
-                    dY = -1;
+                    dY = -1 * step;
                     break;
                 case this.keys.MOVEMENT_DOWN:
                     dX = 0;
-                    dY = 1;
+                    dY = step;
                     break;
                 case this.keys.MOVEMENT_RIGHT:
-                    dX = 1;
+                    dX = step;
                     dY = 0;
                     break;
                 case this.keys.MOVEMENT_LEFT:
-                    dX = -1;
+                    dX = -1 * step;
                     dY = 0;
                     break;
             }

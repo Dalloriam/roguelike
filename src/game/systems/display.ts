@@ -6,7 +6,9 @@ import { GameObject } from "../engine";
 
 import { Render, Position } from "../components";
 
-import Tile from "../tile";
+import { GetRenderInfo } from "../components/render";
+
+import { GetPosition } from "../components/position";
 
 export class DisplaySystem implements ISystem {
 
@@ -30,22 +32,16 @@ export class DisplaySystem implements ISystem {
         ctx.fillText(char, (x * tileSize) + (tileSize / 2), (y * tileSize) + (tileSize / 2), tileSize / 2);
     }
 
-    private drawMap() {
-        const world = this.world;
-        const ctx = world.ctx;
+    private drawObjects(objs: Array<GameObject>) {
+        objs.forEach((obj) => {
+            let r = obj.emit(new GetRenderInfo()) as GetRenderInfo;
+            let p = obj.emit(new GetPosition()) as GetPosition;
 
-        const tileSize = world.tileSize;
-        const sizeX = world.sizeX;
-        const sizeY = world.sizeY;
-
-        ctx.clearRect(0, 0, sizeX * tileSize, sizeY * tileSize);
-
-        for (let x = 0; x < sizeX; x++) {
-            for (let y = 0; y < sizeY; y++) {
-                let t = world.getTile(x, y);
-                this.drawTile(x, y, t.char, t.bgColor, t.fgColor);
+            if (r && p) {
+                this.drawTile(p.X, p.Y, r.char, r.charBg, r.charFg);
             }
-        }
+
+        });
     }
 
     Update() {
@@ -53,14 +49,7 @@ export class DisplaySystem implements ISystem {
 
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-        this.drawMap();
-
-        this.world.getGameObjects().filter((o) => o.hasComponent("render") && o.hasComponent("position")).forEach((o) => {
-            let r = o.getComponent("render") as Render;
-            let p = o.getComponent("position") as Position;
-
-            // First, draw map tile (because we want to leave default bg or fg if render doesnt specify it)
-            this.drawTile(p.X, p.Y, r.Char, r.CharBg, r.CharFg);
-        });
+        this.drawObjects(this.world.map);
+        this.drawObjects(this.world.getGameObjects().filter((o) => o.hasComponent("render") && o.hasComponent("position")))
     }
 }

@@ -1,15 +1,14 @@
-import { IComponent, IEvent } from "../engine";
+import { Component, IEvent } from "../engine";
 
-export class GetDisplayChar implements IEvent {
-    ID = "GetDisplayChar";
-    DisplayChar: string;
+export class GetRenderInfo implements IEvent {
+    ID = "GetRenderInfo";
 
-    constructor() {
-        this.DisplayChar = "";
-    }
+    char: string;
+    charFg: string;
+    charBg: string;
 }
 
-export class Render implements IComponent {
+export class Render extends Component {
 
     Name = "render";
 
@@ -18,13 +17,22 @@ export class Render implements IComponent {
     CharBg: string;
 
     constructor(char: string, charFg: string, charBg: string) {
+        super();
         this.Char = char;
         this.CharFg = charFg;
         this.CharBg = charBg;
+
+        this.addHandler("GetRenderInfo", this.getRenderInfo, 100);
     }
 
-    FireEvent(e: IEvent): boolean {
-        return false;
-    }
+    getRenderInfo(e: IEvent): boolean | IEvent {
+        let evt = e as GetRenderInfo;
 
+        evt.char = this.Char;
+        evt.charBg = this.CharBg;
+        evt.charFg = this.CharFg;
+
+        return evt;
+    }
+    
 }

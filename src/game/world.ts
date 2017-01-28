@@ -1,4 +1,4 @@
-import Tile from "./tile";
+import Tile from "./entities/tile";
 
 import { GameObject } from "./engine";
 
@@ -10,7 +10,7 @@ export default class World {
     tileSize: number;
 
     private objects: Array<GameObject>;
-    private map: Tile[][]
+    map: Array<GameObject>;
     private systems: Array<ISystem>;
 
     ctx: CanvasRenderingContext2D;
@@ -31,13 +31,10 @@ export default class World {
         this.map = [];
 
         for (let i = 0; i < sizeX; i++) {
-            let row: Array<Tile> = [];
-
             for (let j = 0; j < sizeY; j++) {
                 let char = j == 0 || i == 0 || i == sizeX - 1 || j == sizeY - 1? "#": "";
-                row.push(new Tile("white", "black", char))
+                this.map.push(new Tile(char, "white", "black", i, j))
             }
-            this.map.push(row);
         }
     }
 
@@ -63,10 +60,6 @@ export default class World {
                 this.objects.splice(i, 1);
             }
         }
-    }
-
-    getTile(x: number, y: number): Tile {
-        return this.map[x][y];
     }
 
     tick() {

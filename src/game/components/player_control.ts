@@ -1,9 +1,5 @@
-import { IComponent, IEvent } from "../engine";
+import { Component, IEvent } from "../engine";
 
-export class PlayerControl implements IComponent {
+export class PlayerControl extends Component {
     Name = "player_control";
-
-    FireEvent(evt: IEvent): boolean {
-        return false
-    }
 }

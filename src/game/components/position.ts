@@ -1,7 +1,7 @@
-import { IComponent, IEvent } from "../engine";
+import { Component, IEvent } from "../engine";
 
-export class ChangePosition implements IEvent {
-    ID = "ChangePosition";
+export class PositionChange implements IEvent {
+    ID = "PositionChange";
 
     dX: number;
     dY: number;
@@ -12,7 +12,14 @@ export class ChangePosition implements IEvent {
     }
 }
 
-export class Position implements IComponent {
+export class GetPosition implements IEvent {
+    ID = "GetPosition";
+
+    X: number;
+    Y: number;
+}
+
+export class Position extends Component {
 
     Name = "position";
 
@@ -20,18 +27,30 @@ export class Position implements IComponent {
     Y: number;
 
     constructor(x: number, y: number) {
+        super();
+
         this.X = x;
         this.Y = y;
+
+        this.addHandler("PositionChange", this.OnPositionChange, 100);
+        this.addHandler("GetPosition", this.OnGetPosition, 100);
     }
 
-    FireEvent(e: IEvent): boolean {
-        switch (e.ID) {
-            case "ChangePosition":
-                let evt = e as ChangePosition;
-                this.X += evt.dX;
-                this.Y += evt.dY;
-        }
-        return false;
+    public OnPositionChange(e: IEvent): boolean | IEvent {
+        let evt = e as PositionChange;
+
+        this.X += evt.dX;
+        this.Y += evt.dY;
+
+        return evt;
     }
 
+    public OnGetPosition(e: IEvent): boolean | IEvent {
+        let evt = e as GetPosition;
+
+        evt.X = this.X; 
+        evt.Y = this.Y;
+
+        return evt;
+    }
 }

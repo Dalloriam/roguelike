@@ -64,13 +64,12 @@ export default class Game extends React.Component<IGameProps, IGameState> {
         var w = new World(20, 20, 30, context);
         
         // Hardcode player (TODO: Remove this)
-        w.addObject(
-            new GameObject("Player", [
-                new Render("@", "white", "black"),
-                new Position(10, 10),
-                new PlayerControl()
-            ])
-        );
+        let player = new GameObject("Player");
+        player.addComponent(new PlayerControl(), false);
+        player.addComponent(new Position(10, 10), false);
+        player.addComponent(new Render("@", "white", "black"), false);
+
+        w.addObject(player);
 
         this.setState({
             world: w

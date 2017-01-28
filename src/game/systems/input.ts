@@ -4,7 +4,7 @@ import { ISystem } from "./ISystem";
 
 import { GameObject } from "../engine";
 
-import { ChangePosition } from "../components/position";
+import { PositionChange } from "../components/position";
 
 import PlayerInputStore from "../player_input_store";
 
@@ -61,7 +61,7 @@ export class InputSystem implements ISystem {
             }
 
             this.world.getGameObjects().filter((obj) => obj.hasComponent("player_control") && obj.hasComponent("position")).forEach((obj) => {
-                obj.FireEvent(new ChangePosition(dX, dY));
+                obj.emit(new PositionChange(dX, dY));
             })
         }
     }

@@ -2,7 +2,7 @@ import Tile from "./tile";
 
 import { GameObject } from "./engine";
 
-import { ISystem, DisplaySystem } from  "./systems";
+import { ISystem, DisplaySystem, InputSystem } from  "./systems";
 
 export default class World {
     sizeX: number;
@@ -24,6 +24,7 @@ export default class World {
 
         this.objects = [];
         this.systems = [
+            new InputSystem(this),
             new DisplaySystem(this)
         ];
 

@@ -2,8 +2,11 @@ import * as React from "react";
 
 import { GameObject } from "./engine";
 
-import  { Render, Position } from "./components";
-import { ChangePosition } from "./components/position";
+import PlayerInputStore from "./player_input_store";
+
+import  { Render, Position, PlayerControl } from "./components";
+
+import { CreateKeyPressReceivedAction } from "./actions/key_press";
 
 import World from "./world";
 
@@ -43,48 +46,51 @@ export default class Game extends React.Component<IGameProps, IGameState> {
         canvas: (HTMLCanvasElement);
     }
 
+    componentWillMount() {
+        PlayerInputStore.on("tick", this.tick.bind(this));
+    }
+
     componentDidMount() {
         window.addEventListener('keydown', this.handleKeyPress.bind(this, true));
 
         const context = this.refs.canvas.getContext("2d");
+
         this.setState({
             context: context,
             inGame: true
         });
 
+        // Hardcode game workd (TODO: chang this)
         var w = new World(20, 20, 30, context);
+        
+        // Hardcode player (TODO: Remove this)
         w.addObject(
             new GameObject("Player", [
                 new Render("@", "white", "black"),
-                new Position(10, 10)
+                new Position(10, 10),
+                new PlayerControl()
             ])
         );
 
         this.setState({
             world: w
         });
+
         w.tick();
     }
 
-    handleKeyPress(value: boolean, e: KeyboardEvent): any {
-        switch(e.key) {
-        case "h":
-            console.log("Going left!");
-            break;
-        case "j":
-            console.log("Going down!");
-            break;
-        case "k":
-            console.log("Going up!");
-            break;
-        case "l":
-            console.log("Going right!");
-            break;
-        }
+    componentWillUnmount() {
+        PlayerInputStore.removeListener("tick", this.tick);
+    }
 
+    tick() {
         if (this.state.inGame) {
             this.state.world.tick();
         }
+    }
+
+    handleKeyPress(value: boolean, e: KeyboardEvent): any {
+        CreateKeyPressReceivedAction(e.key);
     }
 
     render() {

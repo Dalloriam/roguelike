@@ -2,7 +2,7 @@ import Tile from "./entities/tile";
 
 import { GameObject } from "./engine";
 
-import { ISystem, DisplaySystem, InputSystem } from  "./systems";
+import { ISystem, DisplaySystem, MovementSystem } from  "./systems";
 
 export default class World {
     sizeX: number;
@@ -24,7 +24,7 @@ export default class World {
 
         this.objects = [];
         this.systems = [
-            new InputSystem(this),
+            new MovementSystem(this),
             new DisplaySystem(this)
         ];
 
@@ -33,7 +33,8 @@ export default class World {
         for (let i = 0; i < sizeX; i++) {
             for (let j = 0; j < sizeY; j++) {
                 let char = j == 0 || i == 0 || i == sizeX - 1 || j == sizeY - 1? "#": "";
-                this.map.push(new Tile(char, "white", "black", i, j))
+                let blocking = char == "#";
+                this.map.push(new Tile(char, "white", "black", i, j, blocking));
             }
         }
     }

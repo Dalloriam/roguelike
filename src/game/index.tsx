@@ -4,7 +4,7 @@ import { GameObject } from "./engine";
 
 import PlayerInputStore from "./player_input_store";
 
-import  { Render, Position, PlayerControl } from "./components";
+import  { Render, Position, PlayerControl, Physics } from "./components";
 
 import { CreateKeyPressReceivedAction } from "./actions/key_press";
 
@@ -67,6 +67,7 @@ export default class Game extends React.Component<IGameProps, IGameState> {
         let player = new GameObject("Player");
         player.addComponent(new PlayerControl(), false);
         player.addComponent(new Position(10, 10), false);
+        player.addComponent(new Physics(true), false);
         player.addComponent(new Render("@", "white", "black"), false);
 
         w.addObject(player);

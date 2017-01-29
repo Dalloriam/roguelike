@@ -2,7 +2,9 @@ import { IEvent, Component, GameObject } from "../engine";
 
 import { GetBlocking } from "../events";
 
-export class Physics extends  Component {
+export class Physics extends Component {
+
+    Name = "physics";
 
     isBlocking: boolean;
 

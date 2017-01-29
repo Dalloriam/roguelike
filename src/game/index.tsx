@@ -1,12 +1,13 @@
 import * as React from "react";
 
-import { GameObject } from "./engine";
-
 import PlayerInputStore from "./player_input_store";
 
-import  { Render, Position, PlayerControl, Physics } from "./components";
+import * as Entities from "./entities";
+import * as Events from "./events";
 
 import { CreateKeyPressReceivedAction } from "./actions/key_press";
+
+import { makeObject, ObjectTemplate, ComponentTemplate } from "./object_factory";
 
 import World from "./world";
 
@@ -60,16 +61,13 @@ export default class Game extends React.Component<IGameProps, IGameState> {
             inGame: true
         });
 
-        // Hardcode game workd (TODO: chang this)
+        // TODO: Generate random map
         var w = new World(20, 20, 30, context);
         
-        // Hardcode player (TODO: Remove this)
-        let player = new GameObject("Player");
-        player.addComponent(new PlayerControl(), false);
-        player.addComponent(new Position(10, 10), false);
-        player.addComponent(new Physics(true), false);
-        player.addComponent(new Render("@", "white", "black"), false);
+        let player = new Entities.Player();
 
+        // TODO: Set player position dynamically
+        player.emit(new Events.SetPosition(10, 10));
         w.addObject(player);
 
         this.setState({

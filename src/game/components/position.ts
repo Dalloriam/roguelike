@@ -1,6 +1,6 @@
 import { Component, IEvent } from "../engine";
 
-import { PositionChange, GetPosition } from "../events";
+import { PositionChange, GetPosition, SetPosition } from "../events";
 
 export class Position extends Component {
 
@@ -9,14 +9,24 @@ export class Position extends Component {
     X: number;
     Y: number;
 
-    constructor(x: number, y: number) {
+    constructor(X?: number, Y?: number) {
         super();
 
-        this.X = x;
-        this.Y = y;
+        this.X = X;
+        this.Y = Y;
 
         this.addHandler("PositionChange", this.OnPositionChange, 100);
+        this.addHandler("SetPosition", this.onSetPosition, 100);
         this.addHandler("GetPosition", this.OnGetPosition, 100);
+    }
+
+    onSetPosition(e: IEvent): boolean | IEvent {
+        let evt = e as SetPosition;
+
+        this.X = evt.X;
+        this.Y = evt.Y;
+
+        return evt;
     }
 
     public OnPositionChange(e: IEvent): boolean | IEvent {

@@ -1,4 +1,4 @@
-import Tile from "./entities/tile";
+import { Tile } from "./entities";
 
 import { GameObject } from "./engine";
 

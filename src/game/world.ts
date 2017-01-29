@@ -1,4 +1,4 @@
-import { Tile } from "./entities";
+import { Wall, Floor } from "./entities/environment";
 
 import { GameObject } from "./engine";
 
@@ -32,9 +32,8 @@ export default class World {
 
         for (let i = 0; i < sizeX; i++) {
             for (let j = 0; j < sizeY; j++) {
-                let char = j == 0 || i == 0 || i == sizeX - 1 || j == sizeY - 1? "#": "";
-                let blocking = char == "#";
-                this.map.push(new Tile(char, "white", "black", i, j, blocking));
+                let tile = j == 0 || i == 0 || i == sizeX - 1 || j == sizeY - 1? Wall: Floor;
+                this.map.push(new tile(i, j));
             }
         }
     }

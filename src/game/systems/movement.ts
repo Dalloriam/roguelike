@@ -1,6 +1,6 @@
 import World from "../world";
 
-import { ISystem } from "./ISystem";
+import { System } from "./system";
 
 import { GameObject } from "../engine";
 
@@ -8,16 +8,10 @@ import { Direction } from "../direction";
 
 import { GetMovement, PositionChange, GetPosition, GetBlocking } from "../events";
 
-export class MovementSystem implements ISystem {
-
-    private world: World;
-
-    constructor(w: World) {
-        this.world = w;
-    }
+export class MovementSystem extends System {
 
     Update() {
-        this.world.getGameObjects().forEach((obj) => {
+        this.world.objects.forEach((obj) => {
             // See if object wants to move
             let mov = obj.emit(new GetMovement()) as GetMovement;
             if (!(mov) || mov.movement == undefined) {
@@ -73,8 +67,6 @@ export class MovementSystem implements ISystem {
 
             var otherBlock = false;
 
-            let objects = this.world.getGameObjects();
-
             for(let i = 0; i < this.world.map.length; i++) {
                 let otherObj = this.world.map[i];
 
@@ -87,8 +79,8 @@ export class MovementSystem implements ISystem {
             }
 
             if (!otherBlock) {
-                for(let i = 0; i < objects.length; i ++) {
-                    let otherObj = objects[i];
+                for(let i = 0; i < this.world.objects.length; i ++) {
+                    let otherObj = this.world.objects[i];
 
                     let otherPos = otherObj.emit(new GetPosition()) as GetPosition;
 

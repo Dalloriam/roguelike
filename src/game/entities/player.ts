@@ -1,6 +1,6 @@
 import { GameObject, Component } from "../engine";
 
-import { Render, Position, Physics, PlayerControl } from "../components";
+import { Render, Position, Physics, PlayerControl, Camera } from "../components";
 
 
 export class Player extends GameObject {
@@ -11,7 +11,8 @@ export class Player extends GameObject {
         [
             new PlayerControl(),
             new Position(),
-            new Physics(true),
+            new Physics(true, 0.8),
+            new Camera(10),
             new Render("@", "white", "black")
         ].forEach((c: Component) => this.addComponent(c, false))
     }

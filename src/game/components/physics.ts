@@ -1,4 +1,4 @@
-import { IEvent, Component, GameObject } from "../engine";
+import { IEvent, Component } from "../engine";
 import * as Events from "../events";
 
 export class Physics extends Component {

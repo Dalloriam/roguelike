@@ -16,5 +16,5 @@ export function makeObject(template: ObjectTemplate): GameObject {
     for (let comp in Components) {
         console.log(comp, typeof comp);
     }
-    return new GameObject("", []);
+    return new GameObject("Hello");
 }

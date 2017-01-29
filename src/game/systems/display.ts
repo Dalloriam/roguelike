@@ -6,9 +6,7 @@ import { GameObject } from "../engine";
 
 import { Render, Position } from "../components";
 
-import { GetRenderInfo } from "../components/render";
-
-import { GetPosition } from "../components/position";
+import { GetRenderInfo, GetPosition } from "../events";
 
 export class DisplaySystem implements ISystem {
 

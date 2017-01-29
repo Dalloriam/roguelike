@@ -1,16 +1,6 @@
 import { IEvent, Component, GameObject } from "../engine";
 
-import { PositionChange } from "./position";
-
-export class GetBlocking implements IEvent {
-    ID = "GetBlocking";
-    isBlocking: boolean;
-
-    constructor() {
-        this.isBlocking = false;
-    }
-}
-
+import { GetBlocking } from "../events";
 
 export class Physics extends  Component {
 

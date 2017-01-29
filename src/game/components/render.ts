@@ -1,12 +1,5 @@
 import { Component, IEvent } from "../engine";
-
-export class GetRenderInfo implements IEvent {
-    ID = "GetRenderInfo";
-
-    char: string;
-    charFg: string;
-    charBg: string;
-}
+import { GetRenderInfo } from "../events";
 
 export class Render extends Component {
 

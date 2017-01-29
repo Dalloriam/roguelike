@@ -1,24 +1,16 @@
 import { Component, IEvent } from "../engine";
 
-import PlayerInputStore from "../player_input_store";
+import { GetMovement } from "../events";
 
-export class GetMovement implements IEvent {
-    ID = "GetMovement";
-    movement: Direction;
-}
+import { Direction } from "../direction";
+
+import PlayerInputStore from "../player_input_store";
 
 export interface KeyConfig {
     MOVEMENT_LEFT: string,
     MOVEMENT_DOWN: string,
     MOVEMENT_UP: string,
     MOVEMENT_RIGHT: string
-}
-
-export enum Direction {
-    UP = 0,
-    RIGHT = 1,
-    DOWN = 2,
-    LEFT = 3,
 }
 
 export class PlayerControl extends Component {

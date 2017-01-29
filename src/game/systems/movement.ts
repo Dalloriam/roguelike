@@ -4,11 +4,9 @@ import { ISystem } from "./ISystem";
 
 import { GameObject } from "../engine";
 
-import { GetMovement, Direction } from "../components/player_control";
+import { Direction } from "../direction";
 
-import { PositionChange, GetPosition } from "../components/position";
-
-import { GetBlocking } from "../components/physics";
+import { GetMovement, PositionChange, GetPosition, GetBlocking } from "../events";
 
 export class MovementSystem implements ISystem {
 

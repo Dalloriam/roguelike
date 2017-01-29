@@ -1,23 +1,6 @@
 import { Component, IEvent } from "../engine";
 
-export class PositionChange implements IEvent {
-    ID = "PositionChange";
-
-    dX: number;
-    dY: number;
-
-    constructor(dx: number, dy: number) {
-        this.dX = dx;
-        this.dY = dy;
-    }
-}
-
-export class GetPosition implements IEvent {
-    ID = "GetPosition";
-
-    X: number;
-    Y: number;
-}
+import { PositionChange, GetPosition } from "../events";
 
 export class Position extends Component {
 

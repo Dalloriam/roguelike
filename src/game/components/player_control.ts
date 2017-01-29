@@ -7,10 +7,14 @@ import { Direction } from "../direction";
 import PlayerInputStore from "../player_input_store";
 
 export interface KeyConfig {
-    MOVEMENT_LEFT: string,
-    MOVEMENT_DOWN: string,
-    MOVEMENT_UP: string,
-    MOVEMENT_RIGHT: string
+    MOVEMENT_LEFT: string;
+    MOVEMENT_DOWN: string;
+    MOVEMENT_UP: string;
+    MOVEMENT_RIGHT: string;
+    MOVEMENT_DOWN_LEFT: string;
+    MOVEMENT_DOWN_RIGHT: string;
+    MOVEMENT_UP_LEFT: string;
+    MOVEMENT_UP_RIGHT: string;
 }
 
 export class PlayerControl extends Component {
@@ -21,7 +25,11 @@ export class PlayerControl extends Component {
         MOVEMENT_LEFT: "h",
         MOVEMENT_DOWN: "j",
         MOVEMENT_UP: "k",
-        MOVEMENT_RIGHT: "l"
+        MOVEMENT_RIGHT: "l",
+        MOVEMENT_DOWN_LEFT: "b",
+        MOVEMENT_DOWN_RIGHT: "n",
+        MOVEMENT_UP_RIGHT: "u",
+        MOVEMENT_UP_LEFT: "y"
     }
 
     constructor() {
@@ -49,6 +57,18 @@ export class PlayerControl extends Component {
                 break;
             case this.keys.MOVEMENT_LEFT:
                 evt.movement = Direction.LEFT;
+                break;
+            case this.keys.MOVEMENT_DOWN_LEFT:
+                evt.movement = Direction.DOWN_LEFT;
+                break;
+            case this.keys.MOVEMENT_DOWN_RIGHT:
+                evt.movement = Direction.DOWN_RIGHT;
+                break;
+            case this.keys.MOVEMENT_UP_LEFT:
+                evt.movement = Direction.UP_LEFT;
+                break;
+            case this.keys.MOVEMENT_UP_RIGHT:
+                evt.movement = Direction.UP_RIGHT;
                 break;
         }
         return evt

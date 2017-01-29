@@ -35,20 +35,33 @@ export class MovementSystem implements ISystem {
                     dX = 0;
                     dY = -1;
                     break;
-
                 case Direction.DOWN:
                     dX = 0;
                     dY = 1;
                     break;
-                
                 case Direction.RIGHT:
                     dX = 1;
                     dY = 0;
                     break;
-                
                 case Direction.LEFT:
                     dX = -1;
                     dY = 0;
+                    break;
+                case Direction.DOWN_RIGHT:
+                    dX = 1;
+                    dY = 1;
+                    break;
+                case Direction.DOWN_LEFT:
+                    dX = -1;
+                    dY = 1;
+                    break;
+                case Direction.UP_RIGHT:
+                    dX = 1;
+                    dY = -1;
+                    break;
+                case Direction.UP_LEFT:
+                    dX = -1;
+                    dY = -1;
                     break;
             }
 

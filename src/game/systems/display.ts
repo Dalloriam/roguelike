@@ -46,16 +46,6 @@ export class DisplaySystem extends System {
         ctx.fillText(char, (x * tileSize) + (tileSize / 2), (y * tileSize) + (tileSize / 2), tileSize / 2);
     }
 
-    private canSee(xCam: number, yCam: number, object: GameObject): boolean {
-        let blocked = true;
-
-        for (let i = 0; i < 1; i += 0.05) {
-
-        }
-
-        return blocked;
-    }
-
     private computeLOS() {
         // Reset Ray map & memory map
         this.rayMap = [];

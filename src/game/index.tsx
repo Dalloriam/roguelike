@@ -7,8 +7,6 @@ import * as Events from "./events";
 
 import { CreateKeyPressReceivedAction } from "./actions/key_press";
 
-import { makeObject, ObjectTemplate, ComponentTemplate } from "./object_factory";
-
 import World from "./world";
 
 export interface IGameProps {

@@ -61,7 +61,12 @@ export class DisplaySystem extends System {
             this.memoryMap.push(mrow);
         }
 
-        this.world.objects.filter((obj) => obj.hasComponent("camera") && obj.hasComponent("position")).forEach((cam) => {
+        this.world.objects.forEach((cam) => {
+
+            if (!cam.hasComponent("camera") || !cam.hasComponent("position")) {
+                return;
+            }
+
             let camPos = cam.emit(new Events.GetPosition()) as Events.GetPosition;
             let camX = camPos.X;
             let camY = camPos.Y;
@@ -126,6 +131,10 @@ export class DisplaySystem extends System {
 
         objs.forEach((obj) => {
 
+            if(!(obj.hasComponent("position") && obj.hasComponent("render"))) {
+                return;
+            }
+
             // If obj is in FOV of cam, render fully
             let r = obj.emit(new Events.GetRenderInfo()) as Events.GetRenderInfo;
             let p = obj.emit(new Events.GetPosition()) as Events.GetPosition;
@@ -145,7 +154,7 @@ export class DisplaySystem extends System {
 
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-        this.drawObjects(this.world.map.filter((o) => o.hasComponent("render") && o.hasComponent("position")));
-        this.drawObjects(this.world.objects.filter((o) => o.hasComponent("render") && o.hasComponent("position")))
+        this.drawObjects(this.world.map);
+        this.drawObjects(this.world.objects);
     }
 }

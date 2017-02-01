@@ -43,6 +43,7 @@ export default class Game extends React.Component<IGameProps, IGameState> {
 
     refs: {
         canvas: (HTMLCanvasElement);
+        canvasContainer: (HTMLElement);
     }
 
     componentWillMount() {
@@ -60,7 +61,9 @@ export default class Game extends React.Component<IGameProps, IGameState> {
         });
 
         // TODO: Generate random map
-        var w = new World(20, 20, 30, context);
+        let xSize = 80;
+        let ySize = 40;
+        var w = new World(xSize, ySize, Math.floor(this.refs.canvasContainer.clientWidth * 0.9 / xSize), context);
         
         let player = new Entities.Player();
 
@@ -91,7 +94,7 @@ export default class Game extends React.Component<IGameProps, IGameState> {
 
     render() {
         return (
-            <div>
+            <div ref="canvasContainer">
             <canvas ref="canvas" 
                 width={ this.state.screen.width * this.state.screen.ratio }
                 height={ this.state.screen.height * this.state.screen.ratio }

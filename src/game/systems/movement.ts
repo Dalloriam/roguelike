@@ -67,14 +67,14 @@ export class MovementSystem extends System {
 
             var otherBlock = false;
 
-            for(let i = 0; i < this.world.map.length; i++) {
-                let otherObj = this.world.map[i];
+            let otherObj = this.world.mapCoords[newX][newY];
 
-                let otherPos = otherObj.emit(new GetPosition()) as GetPosition;
+            let otherPos = otherObj.emit(new GetPosition()) as GetPosition;
 
-                if (newX == otherPos.X && newY == otherPos.Y) {
-                    otherBlock = (otherObj.emit(new GetBlocking()) as GetBlocking).isBlocking;
-                    break
+            if (newX == otherPos.X && newY == otherPos.Y) {
+                otherBlock = (otherObj.emit(new GetBlocking()) as GetBlocking).isBlocking;
+                if (otherBlock) {
+                    return;
                 }
             }
 

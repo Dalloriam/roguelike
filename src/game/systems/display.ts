@@ -40,10 +40,10 @@ export class DisplaySystem extends System {
         ctx.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
 
         ctx.fillStyle = fgColor;
-        ctx.font = "12pt serif";
+        ctx.font = "10pt arial";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
-        ctx.fillText(char, (x * tileSize) + (tileSize / 2), (y * tileSize) + (tileSize / 2), tileSize / 2);
+        ctx.fillText(char, (x * tileSize) + (tileSize / 2), (y * tileSize) + (tileSize / 2), tileSize * 0.9);
     }
 
     private computeLOS() {
@@ -98,7 +98,7 @@ export class DisplaySystem extends System {
                     cam.emit(new Events.AddTileMemory(Math.round(x), Math.round(y)));
 
                     // However, if the current tile blocks sight, stop raytracing.
-                    let currentTile = this.world.mapCoords[Math.round(x)][Math.round(y)];
+                    let currentTile = this.world.map.tilesMap[Math.round(x)][Math.round(y)];
                     let isSeeThrough = currentTile.emit(new Events.GetSeeThrough()) as Events.GetSeeThrough;
 
                     if (isSeeThrough && !isSeeThrough.isSeeThrough) {
@@ -154,7 +154,7 @@ export class DisplaySystem extends System {
 
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-        this.drawObjects(this.world.map);
+        this.drawObjects(this.world.map.tiles);
         this.drawObjects(this.world.objects);
     }
 }

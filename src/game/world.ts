@@ -1,8 +1,8 @@
-import { Wall, Floor } from "./entities/environment";
-
 import { GameObject } from "./engine";
 
 import { System, DisplaySystem, MovementSystem } from  "./systems";
+
+import { GenerateLevel, BaseLevel } from "./map";
 
 export default class World {
     sizeX: number;
@@ -10,8 +10,7 @@ export default class World {
     tileSize: number;
 
     objects: Array<GameObject>;
-    map: Array<GameObject>;
-    mapCoords: GameObject[][];
+    map: BaseLevel;
     private systems: Array<System>;
 
     ctx: CanvasRenderingContext2D;
@@ -29,21 +28,7 @@ export default class World {
             new DisplaySystem(this)
         ];
 
-        this.map = [];
-        this.mapCoords = [];
-        for (let i = 0; i < sizeX; i++) {
-            let row = [];
-            for (let j = 0; j < sizeY; j++) {
-                let tile = j == 0 || i == 0 || i == sizeX - 1 || j == sizeY - 1? Wall: Floor;
-                if (i == 4 && j == 4) {
-                    tile = Wall;
-                }
-                let t = new tile(i, j);
-                row.push(t);
-                this.map.push(t);
-            }
-            this.mapCoords.push(row);
-        }
+        this.map = GenerateLevel(sizeX, sizeY);
     }
 
     getObject(objId: number): GameObject {

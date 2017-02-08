@@ -60,15 +60,13 @@ export default class Game extends React.Component<IGameProps, IGameState> {
             inGame: true
         });
 
-        // TODO: Generate random map
         let xSize = 80;
         let ySize = 40;
         var w = new World(xSize, ySize, Math.floor(this.refs.canvasContainer.clientWidth * 0.9 / xSize), context);
         
         let player = new Entities.Player();
 
-        // TODO: Set player position dynamically
-        player.emit(new Events.SetPosition(10, 10));
+        player.emit(new Events.SetPosition(w.map.playerX, w.map.playerY));
         w.addObject(player);
 
         this.setState({

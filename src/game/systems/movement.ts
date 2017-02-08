@@ -67,7 +67,7 @@ export class MovementSystem extends System {
 
             var otherBlock = false;
 
-            let otherObj = this.world.mapCoords[newX][newY];
+            let otherObj = this.world.map.tilesMap[newX][newY];
 
             let otherPos = otherObj.emit(new GetPosition()) as GetPosition;
 

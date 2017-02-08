@@ -1,6 +1,6 @@
 import { GameObject } from "../engine";
 
-export abstract class BaseLevel {
+export class BaseLevel {
 
     mapWidth: number;
     mapHeight: number;
@@ -8,19 +8,22 @@ export abstract class BaseLevel {
     tiles: Array<GameObject>;
     tilesMap: GameObject[][];
     type: string
-    seed: string;
+    seed: number;
 
-    constructor(mapWidth: number, mapHeight: number, type: string, seed: string) {
+    playerX: number;
+    playerY: number;
+
+    constructor(mapWidth: number, mapHeight: number, seed: number) {
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
-
-        this.type = type;
         this.seed = seed;
 
         this.tiles = [];
         this.tilesMap = [];
     }
 
-    abstract generate(): void;
+     generate(): void {
+
+     }
 
 }
